@@ -1,9 +1,7 @@
 # Week9-ResearchProjects
 DataEngineering projects
 
-main readme
-
-Pick one tech from each of these categories
+Pick one tech from each of these categories, follow the intentions directly.
 
 ## New Language
 

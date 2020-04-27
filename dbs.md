@@ -8,4 +8,4 @@
 **Expectations**:
 * Understand the concepts behind it.
 * Demonstrate CRUD operations with the native database cli.
-* Demonstrate CRUD operations with a drive for Python, or another language of your choice.
+* Demonstrate CRUD operations with a driver program for Python, or another language of your choice.

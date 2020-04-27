@@ -7,7 +7,7 @@ Research and provide simple examples of creation and maniuplation of doata objec
 
 Select and implement a follow-through of notebook in one of the following languages:
 
-- Julia 
-- SCALA 
-- R
-- Swift
+- [Julia](https://julialang.org/) 
+- [SCALA](https://www.scala-lang.org/)
+- [R](https://www.r-project.org/about.html)
+- [Swift](https://swift.org/)

@@ -84,5 +84,29 @@ ggplot(color_counts, aes(x=is_trans,
               geom_label(aes(label=number_of_color), size=5)
 
 
+#Average part per year
+options(repr.plot.width=6, repr.plot.height=3)
+avg_parts_per_year <- sets %>% 
+  select(year, num_parts) %>% 
+  group_by(year) %>% 
+  summarize(avg_num_parts=mean(num_parts))
+str(avg_parts_per_year)
+avg_parts_per_year$year <- as.factor(avg_parts_per_year$year)
+
+avg_parts_per_year %>% ggplot(aes(x=year, 
+                                  y=avg_num_parts, 
+                                  group=1)) + 
+  geom_line(size=0.5) + 
+  geom_point(color='purple', size=1.5) +
+  geom_smooth(aes(group=1), color = 'gold') +
+  theme_economist() +
+  theme(axis.text.x = 
+          element_text(angle=30, face='bold', hjust=0), 
+        legend.position = 'none') +
+  scale_x_discrete(breaks = 
+                     avg_parts_per_year$year[seq(1,length(avg_parts_per_year$year), by = 5)]) +
+  geom_label(data=subset(avg_parts_per_year, avg_num_parts == max(avg_num_parts)),
+             aes(label=avg_num_parts, y = avg_num_parts), vjust = 1.5 ) +
+  labs(title = 'Average parts number per year')
 
 

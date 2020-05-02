@@ -6,7 +6,9 @@ options(warn=-1,message=-1)
 library(dplyr)
 library(psych)
 library(ggthemes)
+library(mongolite)
 setwd('/Users/nli/dev/Week9-ResearchProjects')
+
 
 
 #This lego dataset came from 8 different csv files, and it has internal realtionship
@@ -70,11 +72,12 @@ colors<-colors%>%mutate(rgb=paste0("#", str_trim(rgb)))
 fav_color <- colors$rgb
 names(fav_color) <- fav_color
 
+
 #simple bar plot
 color_counts <- colors %>% 
                 group_by(is_trans) %>% 
                 summarize(number_of_color = n())
-options(repr.plot.width=6, repr.plot.height=4)
+options(repr.plot.width=6, repr.plot.height=3)
 ggplot(color_counts, aes(x=is_trans, 
                          y=number_of_color, 
                          fill=as.factor(is_trans))) +
@@ -84,29 +87,75 @@ ggplot(color_counts, aes(x=is_trans,
               geom_label(aes(label=number_of_color), size=5)
 
 
-#Average part per year
+#Average parts per year
 options(repr.plot.width=6, repr.plot.height=3)
+#select the parameter
 avg_parts_per_year <- sets %>% 
-  select(year, num_parts) %>% 
-  group_by(year) %>% 
-  summarize(avg_num_parts=mean(num_parts))
+              select(year, num_parts) %>% 
+              group_by(year) %>% 
+              summarize(avg_num_parts=mean(num_parts))
 str(avg_parts_per_year)
 avg_parts_per_year$year <- as.factor(avg_parts_per_year$year)
 
 avg_parts_per_year %>% ggplot(aes(x=year, 
                                   y=avg_num_parts, 
                                   group=1)) + 
-  geom_line(size=0.5) + 
-  geom_point(color='purple', size=1.5) +
-  geom_smooth(aes(group=1), color = 'gold') +
-  theme_economist() +
-  theme(axis.text.x = 
-          element_text(angle=30, face='bold', hjust=0), 
-        legend.position = 'none') +
-  scale_x_discrete(breaks = 
-                     avg_parts_per_year$year[seq(1,length(avg_parts_per_year$year), by = 5)]) +
-  geom_label(data=subset(avg_parts_per_year, avg_num_parts == max(avg_num_parts)),
-             aes(label=avg_num_parts, y = avg_num_parts), vjust = 1.5 ) +
-  labs(title = 'Average parts number per year')
+                    geom_line(size=0.5) + 
+                    geom_point(color='purple', size=1.5) +
+                    geom_smooth(aes(group=1), color = 'gold') +
+                    theme_economist() +
+                    theme(axis.text.x = 
+                          element_text(angle=30, face='bold', hjust=0), 
+                              legend.position = 'none') +
+                    scale_x_discrete(breaks = 
+                        avg_parts_per_year$year[seq(1,
+                              length(avg_parts_per_year$year), by = 5)]) +
+                    geom_label(data=subset(avg_parts_per_year, avg_num_parts == max(avg_num_parts)),
+                        aes(label=avg_num_parts, y = avg_num_parts), vjust = 1.5 ) +
+                    ggtitle('Average parts number per year')
 
+
+#Number sets per year
+options(repr.plot.width=6, repr.plot.height=3)
+num_sets_per_year <- sets %>%
+                      select(year, set_num) %>%
+                      group_by(year) %>%
+                      summarize(num_sets = n())
+#str(num_sets_per_year)
+num_sets_per_year$year <- as.factor(num_sets_per_year$year)
+
+num_sets_per_year %>% ggplot(aes(x=year, 
+                                 y=num_sets, 
+                                 group=1)) + 
+                      #geom_bar(stat='identity')
+                      geom_line(size=0.5) + 
+                      geom_point(color='darkgreen', size=1.5) +
+                      geom_smooth(aes(group=1), color = 'yellow') +
+                      theme_economist() +
+                      theme(axis.text.x = 
+                          element_text(angle=0, face='bold', hjust=0), 
+                              legend.position = 'none') +   # x-axis scale
+                      scale_x_discrete(breaks = 
+                          num_sets_per_year$year[seq(1,
+                              length(num_sets_per_year$year), by = 5)]) + # x-interval
+                      ggtitle('Number of sets number per year')
+
+
+#Top 10 sets with most parts:
+#select the parameter
+name_w_most_parts <- sets %>% 
+                      select(name, year, num_parts) %>% 
+                      arrange(desc(num_parts))
+top_10_names <- name_w_most_parts[1:10,]
+
+top_10_names %>% ggplot(aes(x=reorder(name, -num_parts), 
+                            y=num_parts, 
+                            fill=name)) +
+                      geom_histogram(stat='identity') + 
+                      theme_fivethirtyeight() +
+                      theme(axis.text.x = 
+                          element_text(angle=50, face='bold', hjust=1),
+                          legend.position = 'none') +
+                      geom_label(aes(label=num_parts)) +
+                      ggtitle('Top 10 sets with most parts')
 

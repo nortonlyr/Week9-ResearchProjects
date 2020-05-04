@@ -9,18 +9,48 @@ library(ggthemes)
 library(mongolite)
 setwd('/Users/nli/dev/Week9-ResearchProjects')
 
+# Query Data from MongoDb and import to R as table
+con_colors <- mongo("colors", url = "mongodb://localhost:27017/lego")
+con_colors$find()
+colors <- con_colors$find()
 
+con_sets <- mongo("sets", url = "mongodb://localhost:27017/lego")
+con_sets$find()
+sets <- con_sets$find()
 
-#This lego dataset came from 8 different csv files, and it has internal realtionship
+con_parts <- mongo("parts", url = "mongodb://localhost:27017/lego")
+con_parts$find()
+parts <- con_parts$find()
 
-colors<-read.csv("./lego-database/colors.csv")
-sets<-read.csv("./lego-database/sets.csv")
-parts<-read.csv("./lego-database/parts.csv")
-inventory_sets<-read.csv("./lego-database/inventory_sets.csv")
-inventories<-read.csv("./lego-database/inventories.csv")
-inventory_parts<-read.csv("./lego-database/inventory_parts.csv")
-themes<-read.csv("./lego-database/themes.csv")
-part_categories<-read.csv("./lego-database/part_categories.csv")
+con_inventory_sets<- mongo("inventory_sets", url = "mongodb://localhost:27017/lego")
+con_inventory_sets$find()
+inventory_sets <- con_inventory_sets$find()
+
+con_inventories <- mongo("inventories", url = "mongodb://localhost:27017/lego")
+con_inventories$find()
+inventories <- con_inventories$find()
+
+con_inventory_parts <- mongo("inventory_parts", url = "mongodb://localhost:27017/lego")
+con_inventory_parts$find()
+inventory_parts <- con_inventory_parts$find()
+
+con_themes <- mongo("themes", url = "mongodb://localhost:27017/lego")
+con_themes$find()
+themes <- con_themes$find()
+
+con_part_categories <- mongo("part_categories", url = "mongodb://localhost:27017/lego")
+con_part_categories$find()
+part_categories <- con_part_categories$find()
+
+#We can also import lego dataset came from 8 different csv files
+#colors<-read.csv("./lego-database/colors.csv")
+#sets<-read.csv("./lego-database/sets.csv")
+#parts<-read.csv("./lego-database/parts.csv")
+#inventory_sets<-read.csv("./lego-database/inventory_sets.csv")
+#inventories<-read.csv("./lego-database/inventories.csv")
+#inventory_parts<-read.csv("./lego-database/inventory_parts.csv")
+#themes<-read.csv("./lego-database/themes.csv")
+#part_categories<-read.csv("./lego-database/part_categories.csv")
 
 #read all the inserted csvfiles
 View(colors)
@@ -158,4 +188,5 @@ top_10_names %>% ggplot(aes(x=reorder(name, -num_parts),
                           legend.position = 'none') +
                       geom_label(aes(label=num_parts)) +
                       ggtitle('Top 10 sets with most parts')
+
 

@@ -1,0 +1,49 @@
+# Introduction of NoSQL Database: MongoDB
+# Installation
+
+# - Bash Command -
+brew tap mongodb/brew
+brew install mongodb-community
+brew services start mongodb-community
+
+#Run the mango cli
+mongo
+
+#show database and collection
+
+show dbs
+Show collections
+
+#direct to create a database if not exist
+use test
+
+#Simple CRUD single data - Bash command - or - DataGrip -
+db.students.insertOne({'name': 'Peter',  'age' : 20, 'gender': 'M'})
+db.students.insertOne({'name': 'Nina',  'age' : 22, 'gender': 'F', 'state': 'NY'})
+db.students.update({"_id": ObjectId('5eb0163b4b806a65cd77467f')},
+                    {$set:{'state':'NJ',
+                    }}
+)
+
+# make a simple for loop
+for(var i =1; i <=200; i++){
+            db.numbers.insert({num:i});
+}
+
+db.numbers.find()
+use numbers
+show dbs
+db.numbers.drop();
+
+
+# Import csv data into mongoDB (- Bash Command -)
+mongoimport --db=lego --collection=themes --type=csv --headline --file=/Users/nli/dev/R_exercise/ themes.csv
+
+# Export data from mongoDB (- Bash Command -)
+mongoexport --db=lego --collection=themes --type=csv --fields=id,name,parent_id --out=/Users/nli/dev/R_exercise/themes.csv
+
+
+# if in the R or python IDE
+# In R-Studio, use library(mongolite)
+# In Python (Jupyter notebook, Pycharm), use pymongo
+

@@ -82,6 +82,15 @@ typeof(inventory_parts)
 typeof(themes)
 typeof(part_categories)
 
+#class of files
+class(colors)
+class(sets)
+class(parts)
+class(inventory_sets)
+class(inventories)
+class(inventory_parts)
+class(themes)
+class(part_categories)
 
 sum(is.na(colors))
 sum(is.na(sets))

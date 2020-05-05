@@ -14,3 +14,5 @@ Pick one tech from each of these categories, follow the intentions directly.
 ## Data Visualization
 
 [Data Visualization](vis.md)
+
+#![description_if_image_fails_to_load](/png)

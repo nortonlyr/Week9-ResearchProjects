@@ -16,6 +16,8 @@ Pick one tech from each of these categories, follow the intentions directly.
 [Data Visualization](vis.md)
 
 
+## Project Summuary:
+
 - In this project (LEGO dataset), I applied both R-Studio and jupyter notebook to import and export data from MongoDB database, and then used ggplot2 and plotly to demonstrate data visualization, respectively.
 
 ![description_if_image_fails_to_load](https://github.com/nortonlyr/Week9-ResearchProjects/blob/master/codes/3Dfig.svg)

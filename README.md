@@ -5,14 +5,14 @@ Pick one tech from each of these categories, follow the intentions directly.
 
 ## New Language (R)
 
-R:
+R: Statistical programing language
 
 
 [New Language Topics](lang.md)
 
 ## New NoSQL Database (MongoDB)
 
-MongoDB:
+MongoDB: A cross-platform document-oriented database program
 
 
 [New NoSQL Database](dbs.md)

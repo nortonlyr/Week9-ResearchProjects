@@ -5,9 +5,15 @@ Pick one tech from each of these categories, follow the intentions directly.
 
 ## New Language (R)
 
+R:
+
+
 [New Language Topics](lang.md)
 
 ## New NoSQL Database (MongoDB)
+
+MongoDB:
+
 
 [New NoSQL Database](dbs.md)
 
